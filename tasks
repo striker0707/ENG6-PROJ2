@@ -1,0 +1,16 @@
+-flatten/expand functions (easy)
+
+-embedding techniques (needd to make recovery technique for your embedding technique
+	odd/even red (given) -> can also apply it to green and blue channels
+	make some up (make sure they don't interfere with other embedding processes)
+	
+  -recovery technique
+	  odd/even red (given)
+	
+-gui (easy)
+	load normal image
+	pick image to embed
+	pick embed technique
+	save resultant image
+	load embedded image
+	extraction
