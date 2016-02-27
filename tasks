@@ -1,16 +1,28 @@
--flatten/expand functions (easy)
+Team: Team
 
--embedding techniques (needd to make recovery technique for your embedding technique
-	odd/even red (given) -> can also apply it to green and blue channels
-	make some up (make sure they don't interfere with other embedding processes)
-	
+Gabriel Mendez A02
+
+Gordon Wang A02
+
+Michelle Swedek A04
+
+------------------------------------
+
+Michelle:
+-flatten/expand functions (~3/4/16)
+
+Gabe/Gordon/Michelle: (everyone responsible for a method ideally) (~3/11/16)
+-embedding techniques (need to make recovery technique for your embedding technique)
+    odd/even red (given) -> can also apply it to green and blue channels
+    make some up (make sure they don't interfere with other embedding processes)
   -recovery technique
-	  odd/even red (given)
-	
--gui (easy)
-	load normal image
-	pick image to embed
-	pick embed technique
-	save resultant image
-	load embedded image
-	extraction
+      odd/even red (given)
+
+Gordon:    
+-gui (~3/4/16)
+    load normal image
+    pick image to embed
+    pick embed technique
+    save resultant image
+    load embedded image
+    extraction
