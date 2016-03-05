@@ -11,6 +11,51 @@ Michelle Swedek A04
 Michelle:
 -flatten/expand functions (~3/4/16)
 
+% Flatten function
+function x=flatten(x)
+x=x>150; % Setting threshold at 150
+end
+
+% Expand function
+function x=expand(x)
+x=cat(3,x,x,x); % Expanding 2D image to 3D
+end
+
+% Odd/Even Red Embedding, used hidden01.png
+dog=imread('dogImage.png');
+hidden1=imread('hidden01.png');
+hidden1flatten=flatten(hidden1);
+dogRedLayer=dog(:,:,1);
+dogRedLayerNew=zeros(400,400);
+first=@(x) x(1);
+for n=1:160000
+    if hidden1flatten(n)==1
+        if first(factor(dogRedLayer(n)))==2
+            dogRedLayerNew(n)=dogRedLayer(n)-1;
+        else
+            dogRedLayerNew(n)=dogRedLayer(n);
+        end
+    elseif hidden1flatten(n)==0
+        if first(factor(dogRedLayer(n)))~=2
+            dogRedLayerNew(n)=dogRedLayer(n)-1;
+        else
+            dogRedLayerNew(n)=dogRedLayer(n);
+        end
+    end
+end
+% Odd/Even Red Recovery
+recoveredImage=uint8(zeros(400,400));
+for m=1:160000
+    if first(factor(dogRedLayerNew(m)))~=2;
+        recoveredImage(m)=1;
+    else
+        recoveredImage(m)=0;
+    end
+end
+recoveredImage=logical(recoveredImage);
+recoveredImage=expand(recoveredImage);
+image(recoveredImage)
+
 Gabe/Gordon/Michelle: (everyone responsible for a method ideally) (~3/11/16)
 -embedding techniques (need to make recovery technique for your embedding technique)
     odd/even red (given) -> can also apply it to green and blue channels
