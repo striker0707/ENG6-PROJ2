@@ -1,0 +1,3 @@
+dog=imread('dogImage.png');
+hidden1=imread('hidden01.png');
+% then flatten and begin embedding
