@@ -16,3 +16,5 @@ for n=1:160000
         end
     end
 end
+newDogImage=cat(3,dogRedLayer,dog(:,:,2),dog(:,:,3));
+image(newDogImage)
