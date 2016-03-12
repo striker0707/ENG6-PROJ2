@@ -1,0 +1,49 @@
+dog=imread('dogImage.png');
+hiddenImageflattened=imread('hidden10.png');
+
+
+%embedding
+dogRed=dog(:,:,1);
+newDog=zeros(400,400);
+for i=1:160000
+    if hiddenImageflattened(i)==1  %if white pixel mod9 make multiple of 9
+        switch mod(dogRed(i),9)
+            case 0
+                  dogRed(i)=dogRed(i);
+            case 1
+                 dogRed(i)=dogRed(i)-1;
+            case 2
+                dogRed(i)=dogRed(i)-2;
+            case 3
+                dogRed(i)=dogRed(i)-3;
+            case 4
+                dogRed(i)=dogRed(i)-4;
+            case 5
+                dogRed(i)=dogRed(i)+4;
+            case 6
+                dogRed(i)=dogRed(i)+3;
+            case 7
+                dogRed(i)=dogRed(i)+2;
+            otherwise
+                dogRed(i)=dogRed(i)+1;
+        end
+    else %if dark pixel mod6 make multiple of 6
+         switch mod(dogRed(i),6) 
+             case 0
+                dogRed(i)=dogRed(i);
+            case 1
+                 dogRed(i)=dogRed(i)-1;
+            case 2
+                dogRed(i)=dogRed(i)-2;
+            case 3
+                 dogRed(i)=dogRed(i)-3;
+            case 4
+                dogRed(i)=dogRed(i)+2;
+            otherwise
+                dogRed(i)=dogRed(i)+1;
+         end
+    end
+end
+
+dogUpdate=cat(3,dogRed,dog(:,:,2),dog(:,:,3));
+image(newDog);
