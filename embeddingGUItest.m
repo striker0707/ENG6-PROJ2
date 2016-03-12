@@ -22,7 +22,7 @@ function varargout = embeddingGUItest(varargin)
 
 % Edit the above text to modify the response to help embeddingGUItest
 
-% Last Modified by GUIDE v2.5 08-Mar-2016 09:46:37
+% Last Modified by GUIDE v2.5 12-Mar-2016 15:21:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,7 +102,7 @@ function loadImage_Callback(hObject, eventdata, handles)
 % hObject    handle to loadImage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[File_Name, Path_Name] = uigetfile(); %sourced from matlab forums to get file
+[File_Name, Path_Name] = uigetfile('*.png'); %sourced from matlab forums to get file
        axes(handles.originalImage)
        imshow([Path_Name,File_Name])
 
@@ -114,6 +114,62 @@ function selectImage_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns selectImage contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from selectImage
+
+str=get(hObject,'String');
+val=get(hObject,'Value');
+
+switch str{val};
+    case 'Image 1'
+        secretimage=imread('hidden01','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Image 2'
+        secretimage=imread('hidden02','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Image 3'
+        secretimage=imread('hidden03','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Image 4'
+        secretimage=imread('hidden04','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Image 5'
+        secretimage=imread('hidden05','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Image 6'
+        secretimage=imread('hidden06','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+
+    case 'Image 7'
+        secretimage=imread('hidden07','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+
+    case 'Image 8'
+        secretimage=imread('hidden08','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+
+    case 'Image 9'
+        secretimage=imread('hidden09','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Image 10'
+        secretimage=imread('hidden10','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -152,22 +208,83 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in embedImage.
-function embedImage_Callback(hObject, eventdata, handles)
-% hObject    handle to embedImage (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
 % --- Executes on button press in saveImage.
 function saveImage_Callback(hObject, eventdata, handles)
 % hObject    handle to saveImage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+[FileName, PathName] = uiputfile('*.png', 'Save As');
+Name = fullfile(PathName,FileName);
+image=getframe(handles.modifiedImage);
+image=frame2im(image);
+imwrite(image, Name, 'bmp');
 
 
-% --- Executes on button press in pushbutton8.
-function pushbutton8_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton8 (see GCBO)
+% --- Executes on button press in openRecovery.
+function openRecovery_Callback(hObject, eventdata, handles)
+% hObject    handle to openRecovery (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+recoveryGUItest
+
+
+% --- Executes on button press in embed.
+function embed_Callback(hObject, eventdata, handles)
+% hObject    handle to embed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+str=get(handles.selectMethod,'String');
+val=get(handles.selectMethod,'Value');
+
+switch str{val};
+    case 'Method 1'
+        secretimage=imread('hidden01','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Method 2'
+        secretimage=imread('hidden02','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Method 3'
+        secretimage=imread('hidden03','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Method 4'
+        secretimage=imread('hidden04','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Method 5'
+        secretimage=imread('hidden05','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Method 6'
+        secretimage=imread('hidden06','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+
+    case 'Method 7'
+        secretimage=imread('hidden07','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+
+    case 'Method 8'
+        secretimage=imread('hidden08','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+
+    case 'Method 9'
+        secretimage=imread('hidden09','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+    case 'Method 10'
+        secretimage=imread('hidden10','png');
+        axes(handles.secretImage)
+        imshow(secretimage)
+        
+end
