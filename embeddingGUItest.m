@@ -241,12 +241,14 @@ hidden1=getimage(handles.secretImage);
 hidden1flatten=flatten(hidden1);
 
 dogRedLayer=dog(:,:,1);
+dogRedLayerNew=zeros(400,400);
 dogGreenLayer=dog(:,:,2);
+dogGreenLayerNew=zeros(400,400);
 dogBlueLayer=dog(:,:,3);
+dogBlueLayerNew=zeros(400,400);
 
 switch str{val};
     case 'Odd-Even Red'
-        dogRedLayerNew=zeros(400,400);
         first=@(x) x(1);
         for n=1:160000
             if hidden1flatten(n)==1
@@ -268,7 +270,6 @@ switch str{val};
         image(newDogImage);
         
     case 'Odd-Even Green'
-        dogGreenLayerNew=zeros(400,400);
         first=@(x) x(1);
         for n=1:160000
             if hidden1flatten(n)==1
@@ -290,7 +291,6 @@ switch str{val};
         image(newDogImage);
         
     case 'Odd-Even Blue'
-        dogBlueLayerNew=zeros(400,400);
         first=@(x) x(1);
         for n=1:160000
             if hidden1flatten(n)==1
@@ -312,7 +312,6 @@ switch str{val};
         image(newDogImage);
         
     case 'Red Mod 2'
-        dogRedLayerNew=zeros(400,400);
         for n=1:160000
             if hidden1flatten(n)==1
                 if mod(dogRedLayer(n),2)==0
@@ -333,7 +332,6 @@ switch str{val};
         image(newDogImage);
         
     case 'Green Mod 2'
-        dogGreenLayerNew=zeros(400,400);
         for n=1:160000
             if hidden1flatten(n)==1
                 if mod(dogGreenLayer(n),2)==0
@@ -354,7 +352,6 @@ switch str{val};
         image(newDogImage);
         
     case 'Blue Mod 2'
-        dogBlueLayerNew=zeros(400,400);
         for n=1:160000
             if hidden1flatten(n)==1
                 if mod(dogBlueLayer(n),2)==0
@@ -374,20 +371,72 @@ switch str{val};
         axes(handles.modifiedImage);
         image(newDogImage);
         
-    case 'Method 4'
-        secretimage=imread('hidden04','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
+    case 'Red Mod 3'
+        for n=1:160000
+            if hidden1flatten(n)==1 % make mod3==0
+                if mod(dogRedLayer(n),3)==0
+                    dogRedLayerNew(n)=dogRedLayer(n);
+                elseif mod(dogRedLayer(n),3)==1
+                    dogRedLayerNew(n)=dogRedLayer(n)-1;
+                elseif mod(dogRedLayer(n),3)==2
+                    dogRedLayerNew(n)=dogRedLayer(n)+1;
+                end
+            elseif hidden1flatten(n)==0
+                if mod(dogRedLayer(n),3)==0
+                    dogRedLayerNew(n)=dogRedLayer(n)-1;
+                else
+                    dogRedLayerNew(n)=dogRedLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
+
         
-    case 'Method 4'
-        secretimage=imread('hidden04','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
+    case 'Green Mod 3'
+        for n=1:160000
+            if hidden1flatten(n)==1 % make mod3==0
+                if mod(dogGreenLayer(n),3)==0
+                    dogGreenLayerNew(n)=dogGreenLayer(n);
+                elseif mod(dogGreenLayer(n),3)==1
+                    dogGreenLayerNew(n)=dogGreenLayer(n)-1;
+                elseif mod(dogGreenLayer(n),3)==2
+                    dogGreenLayerNew(n)=dogGreenLayer(n)+1;
+                end
+            elseif hidden1flatten(n)==0
+                if mod(dogGreenLayer(n),3)==0
+                    dogGreenLayerNew(n)=dogGreenLayer(n)-1;
+                else
+                    dogGreenLayerNew(n)=dogGreenLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dogGreenLayerNew,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
         
-    case 'Method 4'
-        secretimage=imread('hidden04','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
+    case 'Blue Mod 3'
+        for n=1:160000
+            if hidden1flatten(n)==1 % make mod3==0
+                if mod(dogBlueLayer(n),3)==0
+                    dogBlueLayerNew(n)=dogBlueLayer(n);
+                elseif mod(dogBlueLayer(n),3)==1
+                    dogBlueLayerNew(n)=dogBlueLayer(n)-1;
+                elseif mod(dogBlueLayer(n),3)==2
+                    dogBlueLayerNew(n)=dogBlueLayer(n)+1;
+                end
+            elseif hidden1flatten(n)==0
+                if mod(dogBlueLayer(n),3)==0
+                    dogBlueLayerNew(n)=dogBlueLayer(n)-1;
+                else
+                    dogBlueLayerNew(n)=dogBlueLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
+        axes(handles.modifiedImage);
+        image(newDogImage)
         
     case 'Method 4'
         secretimage=imread('hidden04','png');
