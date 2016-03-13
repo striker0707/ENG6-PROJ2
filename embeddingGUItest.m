@@ -438,9 +438,149 @@ switch str{val};
         axes(handles.modifiedImage);
         image(newDogImage)
         
-    case 'Method 4'
-        secretimage=imread('hidden04','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
+    case 'Red Mod 6'
+        for i=1:160000
+            if hidden1flatten(i)==1  %if white pixel make multiple of 9 thats not 6
+                switch mod(dogRedLayer(i),9)
+                    case 0
+                          dogRedLayerNew(i)=dogRedLayer(i);
+                    otherwise
+                        dogRedLayerNew(i)=(round(dogRedLayer(i)/9)*9);
+                        if mod(dogRedLayer(i),6)==0
+                            dogRedLayerNew(i)=dogRedLayerNew(i)-9;
+                        else
+                            dogRedLayerNew(i)=dogRedLayerNew(i);
+                        end
+                end
+            else %if dark pixel make multiple of 6 thats not multiple of 9
+                 switch mod(dogRedLayer(i),6)
+                    case 0
+                          dogRedLayerNew(i)=dogRedLayer(i);
+                    otherwise
+                        dogRedLayerNew(i)=(round(dogRedLayer(i)/6)*6);
+                        if mod(dogRedLayerNew(i),9)==0
+                            dogRedLayerNew(i)=dogRedLayerNew(i)-6;
+                        else
+                            dogRedLayerNew(i)=dogRedLayerNew(i);
+                        end
+                 end
+            end
+        end
+        newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
+
+    case 'Green Mod 6'
+        for i=1:160000
+            if hidden1flatten(i)==1  %if white pixel make multiple of 9 thats not 6
+                switch mod(dogGreenLayer(i),9)
+                    case 0
+                          dogGreenLayerNew(i)=dogGreenLayer(i);
+                    otherwise
+                        dogGreenLayerNew(i)=(round(dogGreenLayer(i)/9)*9);
+                        if mod(dogRedLayer(i),6)==0
+                            dogGreenLayerNew(i)=dogGreenLayerNew(i)-9;
+                        else
+                            dogGreenLayerNew(i)=dogGreenLayerNew(i);
+                        end
+                end
+            else %if dark pixel make multiple of 6 thats not multiple of 9
+                 switch mod(dogGreenLayer(i),6)
+                    case 0
+                          dogGreenLayerNew(i)=dogGreenLayer(i);
+                    otherwise
+                        dogGreenLayerNew(i)=(round(dogGreenLayer(i)/6)*6);
+                        if mod(dogGreenLayerNew(i),9)==0
+                            dogGreenLayerNew(i)=dogGreenLayerNew(i)-6;
+                        else
+                            dogGreenLayerNew(i)=dogGreenLayerNew(i);
+                        end
+                 end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dogGreenLayerNew,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
+
+    case 'Blue Mod 6'
+        for i=1:160000
+            if hidden1flatten(i)==1  %if white pixel make multiple of 9 thats not 6
+                switch mod(dogBlueLayer(i),9)
+                    case 0
+                          dogBlueLayerNew(i)=dogBlueLayer(i);
+                    otherwise
+                        dogBlueLayerNew(i)=(round(dogBlueLayer(i)/9)*9);
+                        if mod(dogBlueLayer(i),6)==0
+                            dogBlueLayerNew(i)=dogBlueLayerNew(i)-9;
+                        else
+                            dogBlueLayerNew(i)=dogBlueLayerNew(i);
+                        end
+                end
+            else %if dark pixel make multiple of 6 thats not multiple of 9
+                 switch mod(dogBlueLayer(i),6)
+                    case 0
+                          dogBlueLayerNew(i)=dogBlueLayer(i);
+                    otherwise
+                        dogBlueLayerNew(i)=(round(dogBlueLayer(i)/6)*6);
+                        if mod(dogBlueLayerNew(i),9)==0
+                            dogBlueLayerNew(i)=dogBlueLayerNew(i)-6;
+                        else
+                            dogBlueLayerNew(i)=dogBlueLayerNew(i);
+                        end
+                 end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
+        axes(handles.modifiedImage);
+        image(newDogImage)
         
+    case 'Red Round to 5'
+        for n=1:160000
+            if hidden1flatten(n)==1 % round to nearest multiple of 5
+                dogRedLayerNew(n)=round(dogRedLayer(n)/5)*5;
+            elseif hidden1flatten(n)==0 % anything except multiple of 5
+                if mod(dogRedLayer(n),5)==0
+                    dogRedLayerNew(n)=dogRedLayer(n)-1;
+                else
+                    dogRedLayerNew(n)=dogRedLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
+        
+    case 'Green Round to 5'
+        for n=1:160000
+            if hidden1flatten(n)==1 % round to nearest multiple of 5
+                dogGreenLayerNew(n)=round(dogGreenLayer(n)/5)*5;
+            elseif hidden1flatten(n)==0 % anything except multiple of 5
+                if mod(dogGreenLayer(n),5)==0
+                    dogGreenLayerNew(n)=dogGreenLayer(n)-1;
+                else
+                    dogGreenLayerNew(n)=dogGreenLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dogGreenLayerNew,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
+        
+    case 'Blue Round to 5'
+        for n=1:160000
+            if hidden1flatten(n)==1 % round to nearest multiple of 5
+                dogBlueLayerNew(n)=round(dogBlueLayer(n)/5)*5;
+            elseif hidden1flatten(n)==0 % anything except multiple of 5
+                if mod(dogBlueLayer(n),5)==0
+                    dogBlueLayerNew(n)=dogBlueLayer(n)-1;
+                else
+                    dogBlueLayerNew(n)=dogBlueLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
+        axes(handles.modifiedImage);
+        image(newDogImage)
+
+
 end

@@ -258,6 +258,97 @@ switch str{val};
         axes(handles.hiddenImage)
         image(recoveredImage)
         
+    case 'Red Mod 6'
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if mod(dogRedLayer(m),9)==0
+                recoveredImage(m)=1;
+            elseif mod(dogRedLayer(m),6)==0
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        
+        axes(handles.hiddenImage)
+        image(recoveredImage)
+
+    case 'Green Mod 6'
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if mod(dogGreenLayer(m),9)==0
+                recoveredImage(m)=1;
+            elseif mod(dogGreenLayer(m),6)==0
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        
+        axes(handles.hiddenImage)
+        image(recoveredImage)
+
+    case 'Blue Mod 6'
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if mod(dogBlueLayer(m),9)==0
+                recoveredImage(m)=1;
+            elseif mod(dogBlueLayer(m),6)==0
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        
+        axes(handles.hiddenImage)
+        image(recoveredImage)
+
+    case 'Red Round to 5'
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if mod(dogRedLayer(m),5)==0;
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        
+        axes(handles.hiddenImage)
+        image(recoveredImage)
+
+    case 'Green Round to 5'
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if mod(dogGreenLayer(m),5)==0;
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        
+        axes(handles.hiddenImage)
+        image(recoveredImage)
+
+    case 'Blue Round to 5'
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if mod(dogBlueLayer(m),5)==0;
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        
+        axes(handles.hiddenImage)
+        image(recoveredImage)
+
+        
 end
 
 
