@@ -1,0 +1,21 @@
+dogRedLayer=dog(:,:,1);
+dogRedLayerNew=zeros(400,400);
+for n=1:160000
+    if hidden1flatten(n)==1 % make mod3==0
+        if mod(dogRedLayer(n),3)==0
+            dogRedLayerNew(n)=dogRedLayer(n);
+        elseif mod(dogRedLayer(n),3)==1
+            dogRedLayerNew(n)=dogRedLayer(n)-1;
+        elseif mod(dogRedLayer(n),3)==2
+            dogRedLayerNew(n)=dogRedLayer(n)+1;
+        end
+    elseif hidden1flatten(n)==0
+        if mod(dogRedLayer(n),3)==0
+            dogRedLayerNew(n)=dogRedLayer(n)-1;
+        else
+            dogRedLayerNew(n)=dogRedLayer(n);
+        end
+    end
+end
+newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
+image(newDogImage)
