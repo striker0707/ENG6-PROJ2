@@ -1,0 +1,31 @@
+dogRedLayer=dog(:,:,1);
+dogRedLayerNew=zeros(400,400);
+for i=1:160000
+    if hidden1flatten(i)==1  %if white pixel make multiple of 9 thats not 6
+        switch mod(dogRedLayer(i),9)
+            case 0
+                  dogRedLayerNew(i)=dogRedLayer(i);
+            otherwise
+                dogRedLayerNew(i)=(round(dogRedLayer(i)/9)*9);
+                if mod(dogRedLayer(i),6)==0
+                    dogRedLayerNew(i)=dogRedLayerNew(i)-9;
+                else
+                    dogRedLayerNew(i)=dogRedLayerNew(i);
+                end
+        end
+    else %if dark pixel make multiple of 6 thats not multiple of 9
+         switch mod(dogRedLayer(i),6)
+            case 0
+                  dogRedLayerNew(i)=dogRedLayer(i);
+            otherwise
+                dogRedLayerNew(i)=(round(dogRedLayer(i)/6)*6);
+                if mod(dogRedLayerNew(i),9)==0
+                    dogRedLayerNew(i)=dogRedLayerNew(i)-6;
+                else
+                    dogRedLayerNew(i)=dogRedLayerNew(i);
+                end
+         end
+    end
+end
+newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
+image(newDogImage)
