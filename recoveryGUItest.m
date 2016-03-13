@@ -118,7 +118,7 @@ dog=getimage(handles.modifiedImage);
 
 
 switch str{val};
-    case 'Method 1'
+    case 'Odd-Even Red'
         first=@(x) x(1);
         dogRedLayer=double(dog(:,:,1));
         recoveredImage=uint8(zeros(400,400));
@@ -132,8 +132,8 @@ switch str{val};
         recoveredImage=logical(recoveredImage);
         recoveredImage=expand(recoveredImage);
 
-        axes(handles.hiddenImage)
-        image(recoveredImage)
+        axes(handles.hiddenImage);
+        image(recoveredImage);
         
     case 'Method 2'
         axes(handles.hiddenImage)
