@@ -261,52 +261,59 @@ switch str{val};
             end
         end
         newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
-        axes(handles.modifiedImage)
-        image(newDogImage)
+        axes(handles.modifiedImage);
+        image(newDogImage);
         
-    case 'Method 2'
-        secretimage=imread('hidden02','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
+    case 'Odd-Even Green'
+        dogGreenLayer=dog(:,:,2);
+        dogGreenLayerNew=zeros(400,400);
+        first=@(x) x(1);
+        for n=1:160000
+            if hidden1flatten(n)==1
+                if first(factor(dogGreenLayer(n)))==2
+                    dogGreenLayerNew(n)=dogGreenLayer(n)-1;
+                else
+                    dogGreenLayerNew(n)=dogGreenLayer(n);
+                end
+            elseif hidden1flatten(n)==0
+                if first(factor(dogGreenLayer(n)))~=2
+                    dogGreenLayerNew(n)=dogGreenLayer(n)-1;
+                else
+                    dogGreenLayerNew(n)=dogGreenLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dogGreenLayerNew,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage);
         
-    case 'Method 3'
-        secretimage=imread('hidden03','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
+    case 'Odd-Even Blue'
+        dogBlueLayer=dog(:,:,3);
+        dogBlueLayerNew=zeros(400,400);
+        first=@(x) x(1);
+        for n=1:160000
+            if hidden1flatten(n)==1
+                if first(factor(dogBlueLayer(n)))==2
+                    dogBlueLayerNew(n)=dogBlueLayer(n)-1;
+                else
+                    dogBlueLayerNew(n)=dogBlueLayer(n);
+                end
+            elseif hidden1flatten(n)==0
+                if first(factor(dogBlueLayer(n)))~=2
+                    dogBlueLayerNew(n)=dogBlueLayer(n)-1;
+                else
+                    dogBlueLayerNew(n)=dogBlueLayer(n);
+                end
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
+        axes(handles.modifiedImage);
+        image(newDogImage);
         
     case 'Method 4'
         secretimage=imread('hidden04','png');
         axes(handles.secretImage)
         imshow(secretimage)
         
-    case 'Method 5'
-        secretimage=imread('hidden05','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
-        
-    case 'Method 6'
-        secretimage=imread('hidden06','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
-
-    case 'Method 7'
-        secretimage=imread('hidden07','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
-
-    case 'Method 8'
-        secretimage=imread('hidden08','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
-
-    case 'Method 9'
-        secretimage=imread('hidden09','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
-        
-    case 'Method 10'
-        secretimage=imread('hidden10','png');
-        axes(handles.secretImage)
-        imshow(secretimage)
         
 end

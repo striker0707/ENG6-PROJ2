@@ -22,7 +22,7 @@ function varargout = recoveryGUItest(varargin)
 
 % Edit the above text to modify the response to help recoveryGUItest
 
-% Last Modified by GUIDE v2.5 12-Mar-2016 15:43:36
+% Last Modified by GUIDE v2.5 12-Mar-2016 18:30:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -116,10 +116,10 @@ val=get(handles.selectMethodR,'Value');
 
 dog=getimage(handles.modifiedImage);
 
+first=@(x) x(1);
 
 switch str{val};
     case 'Odd-Even Red'
-        first=@(x) x(1);
         dogRedLayer=double(dog(:,:,1));
         recoveredImage=uint8(zeros(400,400));
         for m=1:160000
@@ -135,13 +135,37 @@ switch str{val};
         axes(handles.hiddenImage);
         image(recoveredImage);
         
-    case 'Method 2'
-        axes(handles.hiddenImage)
-        imshow(hidden)
+    case 'Odd-Even Green'
+        dogGreenLayer=double(dog(:,:,1));
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if first(factor(dogGreenLayer(m)))~=2;
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+
+        axes(handles.hiddenImage);
+        image(recoveredImage);
         
-    case 'Method 3'
-        axes(handles.hiddenImage)
-        imshow(hidden)
+    case 'Odd-Even Blue'
+        dogBlueLayer=double(dog(:,:,1));
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if first(factor(dogBlueLayer(m)))~=2;
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+
+        axes(handles.hiddenImage);
+        image(recoveredImage);
         
     case 'Method 4'
         axes(handles.hiddenImage)
@@ -151,24 +175,14 @@ switch str{val};
         axes(handles.hiddenImage)
         imshow(hidden)
         
-    case 'Method 6'
-        axes(handles.hiddenImage)
-        imshow(hidden)
 
-    case 'Method 7'
-        axes(handles.hiddenImage)
-        imshow(hidden)
-
-    case 'Method 8'
-        axes(handles.hiddenImage)
-        imshow(hidden)
-
-    case 'Method 9'
-        axes(handles.hiddenImage)
-        imshow(hidden)
-        
-    case 'Method 10'
-        axes(handles.hiddenImage)
-        imshow(hidden)
         
 end
+
+
+% --- Executes on button press in openEmbedding.
+function openEmbedding_Callback(hObject, eventdata, handles)
+% hObject    handle to openEmbedding (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+embeddingGUItest
