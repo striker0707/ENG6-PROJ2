@@ -22,7 +22,7 @@ function varargout = recoveryGUItest(varargin)
 
 % Edit the above text to modify the response to help recoveryGUItest
 
-% Last Modified by GUIDE v2.5 12-Mar-2016 18:30:29
+% Last Modified by GUIDE v2.5 13-Mar-2016 15:46:44
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,7 +60,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes recoveryGUItest wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.GUIR);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -347,6 +347,43 @@ switch str{val};
         
         axes(handles.hiddenImage)
         image(recoveredImage)
+        
+    case 'Add/Sub 2'
+        %sourced from matlab forums, grabs image data from embedding gui
+        h = findobj('Tag','GUIE');
+
+         % if exists (not empty)
+        if ~isempty(h)
+            % get handles and other user-defined data associated to Gui1
+            g1data = guidata(h);
+           
+            dog=getimage(g1data.originalImage);
+        end
+        
+        dogRedLayermod=dog(:,:,1);
+        for n=1:160000
+            if dogRedLayermod(n)==255
+                dogRedLayermod(n)=253;
+            elseif dogRedLayermod(n)==254
+                dogRedLayermod(n)=252;
+            else
+                dogRedLayermod(n)=dogRedLayermod(n);
+            end
+        end
+        
+        recoveredImage=zeros(400,400);
+        for m=1:160000
+            if dogRedLayermod(m)==dogRedLayer(m)-2
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        axes(handles.hiddenImage);
+        image(recoveredImage);
+
 
         
 end

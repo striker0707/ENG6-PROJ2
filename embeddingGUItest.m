@@ -22,7 +22,7 @@ function varargout = embeddingGUItest(varargin)
 
 % Edit the above text to modify the response to help embeddingGUItest
 
-% Last Modified by GUIDE v2.5 12-Mar-2016 17:32:46
+% Last Modified by GUIDE v2.5 13-Mar-2016 15:46:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes embeddingGUItest wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.GUIE);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -579,6 +579,18 @@ switch str{val};
             end
         end
         newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
+        axes(handles.modifiedImage);
+        image(newDogImage)
+        
+    case 'Red Add/Subtract 2'
+        for n=1:160000
+            if hidden1flatten(n)==1 
+                dogRedLayerNew(n)=dogRedLayer(n)+2;
+            elseif hidden1flatten(n)==0
+                dogRedLayerNew(n)=dogRedLayer(n)-2;
+            end
+        end
+        newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
         axes(handles.modifiedImage);
         image(newDogImage)
 
