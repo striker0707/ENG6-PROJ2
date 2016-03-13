@@ -215,7 +215,8 @@ function saveImage_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 [FileName, PathName] = uiputfile('*.png', 'Save As');
 Name = fullfile(PathName,FileName);
-image=getimage(handles.modifiedImage);
+image=getframe(handles.modifiedImage);
+image=frame2im(image);
 imwrite(image, Name, 'bmp');
 
 
@@ -235,13 +236,15 @@ function embed_Callback(hObject, eventdata, handles)
 str=get(handles.selectMethod,'String');
 val=get(handles.selectMethod,'Value');
 
-dog=getimage(handles.originalImage);
+dog=getframe(handles.originalImage);
+dog=frame2im(dog);
 
-hidden1=getimage(handles.secretImage);
+hidden1=getframe(handles.secretImage);
+hidden1=frame2im(hidden1);
 hidden1flatten=flatten(hidden1);
 
 switch str{val};
-    case 'Odd-Even Red'
+    case 'Method 1'
         dogRedLayer=dog(:,:,1);
         dogRedLayerNew=zeros(400,400);
         first=@(x) x(1);
@@ -260,9 +263,10 @@ switch str{val};
                 end
             end
         end
-        newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
-        axes(handles.modifiedImage)
+        newDogImage=cat(3,dogRedLayer,dog(:,:,2),dog(:,:,3));
         image(newDogImage)
+
+        
         
     case 'Method 2'
         secretimage=imread('hidden02','png');

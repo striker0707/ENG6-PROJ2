@@ -1,3 +1,8 @@
+dog=imread('dogImage.png');
+hidden1=imread('hidden01.png');
+hidden1flatten=flatten(hidden1);
+% then flatten and begin embedding
+
 dogRedLayer=dog(:,:,1);
 dogRedLayerNew=zeros(400,400);
 first=@(x) x(1);
@@ -16,5 +21,5 @@ for n=1:160000
         end
     end
 end
-newDogImage=cat(3,dogRedLayer,dog(:,:,2),dog(:,:,3));
+newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
 image(newDogImage)

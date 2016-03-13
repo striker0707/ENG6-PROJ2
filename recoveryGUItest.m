@@ -80,7 +80,7 @@ function loadImage_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 [File_Name, Path_Name] = uigetfile('*.png'); %sourced from matlab forums to get file
-       axes(handles.originalImage)
+       axes(handles.modifiedImage)
        imshow([Path_Name,File_Name])
 
 % --- Executes on selection change in selectMethodR.
@@ -114,11 +114,26 @@ function recover_Callback(hObject, eventdata, handles)
 str=get(handles.selectMethodR,'String');
 val=get(handles.selectMethodR,'Value');
 
+dog=getimage(handles.modifiedImage);
+
+
 switch str{val};
     case 'Method 1'
-        
+        first=@(x) x(1);
+        dogRedLayer=double(dog(:,:,1));
+        recoveredImage=uint8(zeros(400,400));
+        for m=1:160000
+            if first(factor(dogRedLayer(m)))~=2;
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+
         axes(handles.hiddenImage)
-        imshow(hidden)
+        image(recoveredImage)
         
     case 'Method 2'
         axes(handles.hiddenImage)
