@@ -1,0 +1,17 @@
+%embedding
+firstLayer=cellstr(dec2bin(dog(:,:,1)));
+
+
+for n=1:160000
+    %embed second image in secondBit
+    if (hidden2flatten(n)==1) && (firstLayer{n}(7)=='0')
+       firstLayer{n}(7)='1';
+    elseif (hidden2flatten(n)==0) && (firstLayer{n}(7)=='1')
+       firstLayer{n}(7)='0';
+    end
+end
+
+LSB=reshape(bin2dec(char(firstLayer)),400,400);
+
+newImage=cat(3,LSB,dog(:,:,2),dog(:,:,3));
+image(newImage)
