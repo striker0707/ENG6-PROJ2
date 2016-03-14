@@ -1,0 +1,18 @@
+%extraction
+recoveredImage1=zeros(400,400);
+
+
+for m=1:160000
+    %extract first image
+    if secondLayer{m}(8)=='1'
+        recoveredImage1(m)=1;
+    elseif secondLayer{m}(8)=='0'
+        recoveredImage1(m)=0;
+    end
+    
+    
+end
+
+recoveredImage1=logical(recoveredImage1);
+recoveredImage1=expand(recoveredImage1);
+image(recoveredImage1)
