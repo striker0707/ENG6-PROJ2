@@ -348,7 +348,7 @@ switch str{val};
         axes(handles.hiddenImage)
         image(recoveredImage)
         
-    case 'Add/Sub 2'
+    case 'Red Add/Sub 2'
         %sourced from matlab forums, grabs image data from embedding gui
         h = findobj('Tag','GUIE');
 
