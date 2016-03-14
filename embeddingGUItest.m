@@ -239,6 +239,8 @@ dog=getimage(handles.originalImage);
 
 hidden1=getimage(handles.secretImage);
 hidden1flatten=flatten(hidden1);
+hidden2flatten=hidden1flatten;
+hidden3flatten=hidden1flatten;
 
 dogRedLayer=dog(:,:,1);
 dogRedLayerNew=zeros(400,400);
@@ -617,6 +619,187 @@ switch str{val};
         newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
         axes(handles.modifiedImage);
         image(newDogImage)
+        
+    case 'Red Bit 0'
+        %embedding
+        firstLayer=cellstr(dec2bin(dog(:,:,1)));
+
+        for n=1:160000
+            %embed first image in firstBit
+            if (hidden1flatten(n)==1) && (firstLayer{n}(8)=='0')
+               firstLayer{n}(8)='1';
+            elseif (hidden1flatten(n)==0) && (firstLayer{n}(8)=='1')
+               firstLayer{n}(8)='0';
+            end
+        end
+
+        LSB=reshape(bin2dec(char(firstLayer)),400,400);
+
+        newImage=cat(3,LSB,dog(:,:,2),dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newImage)
+        
+    case 'Green Bit 0'
+        %embedding
+        secondLayer=cellstr(dec2bin(dog(:,:,2)));
+
+        for n=1:160000
+            %embed first image in firstBit
+            if (hidden1flatten(n)==1) && (secondLayer{n}(8)=='0')
+               secondLayer{n}(8)='1';
+            elseif (hidden1flatten(n)==0) && (secondLayer{n}(8)=='1')
+               secondLayer{n}(8)='0';
+            end
+
+        end
+
+        LSB2=reshape(bin2dec(char(secondLayer)),400,400);
+
+        newImage=cat(3,dog(:,:,1),LSB2,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Blue Bit 0'
+        %embedding
+        thirdLayer=cellstr(dec2bin(dog(:,:,3)));
+
+        for n=1:160000
+            %embed first image in firstBit
+            if (hidden1flatten(n)==1) && (thirdLayer{n}(8)=='0')
+               thirdLayer{n}(8)='1';
+            elseif (hidden1flatten(n)==0) && (thirdLayer{n}(8)=='1')
+               thirdLayer{n}(8)='0';
+            end
+
+        end
+
+        LSB3=reshape(bin2dec(char(thirdLayer)),400,400);
+
+        newImage=cat(3,dog(:,:,1),dog(:,:,2),LSB3);
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Red Bit 1'
+        %embedding
+        firstLayer=cellstr(dec2bin(dog(:,:,1)));
+
+
+        for n=1:160000
+            %embed second image in secondBit
+            if (hidden2flatten(n)==1) && (firstLayer{n}(7)=='0')
+               firstLayer{n}(7)='1';
+            elseif (hidden2flatten(n)==0) && (firstLayer{n}(7)=='1')
+               firstLayer{n}(7)='0';
+            end
+        end
+
+        LSB=reshape(bin2dec(char(firstLayer)),400,400);
+
+        newImage=cat(3,LSB,dog(:,:,2),dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Green Bit 1'
+        %embedding
+        secondLayer=cellstr(dec2bin(dog(:,:,2)));
+
+
+        for n=1:160000
+           %embed second image in secondBit
+            if (hidden2flatten(n)==1) && (secondLayer{n}(7)=='0')
+               secondLayer{n}(7)='1';
+            elseif (hidden2flatten(n)==0) && (secondLayer{n}(7)=='1')
+               secondLayer{n}(7)='0';
+            end
+
+        end
+
+        LSB2=reshape(bin2dec(char(secondLayer)),400,400);
+
+        newImage=cat(3,dog(:,:,1),LSB2,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Blue Bit 1'
+        %embedding
+        thirdLayer=cellstr(dec2bin(dog(:,:,3)));
+
+
+        for n=1:160000
+            %embed third image in thirdBit
+            if (hidden3flatten(n)==1) && (thirdLayer{n}(6)=='0')
+               thirdLayer{n}(6)='1';
+            elseif (hidden3flatten(n)==0) && (thirdLayer{n}(6)=='1')
+               thirdLayer{n}(6)='0';
+            end
+        end
+
+        LSB3=reshape(bin2dec(char(thirdLayer)),400,400);
+
+        newImage=cat(3,dog(:,:,1),dog(:,:,2),LSB3);
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Red Bit 2'
+        %embedding
+        firstLayer=cellstr(dec2bin(dog(:,:,1)));
+
+
+        for n=1:160000
+           %embed third image in thirdBit
+            if (hidden3flatten(n)==1) && (firstLayer{n}(6)=='0')
+               firstLayer{n}(6)='1';
+            elseif (hidden3flatten(n)==0) && (firstLayer{n}(6)=='1')
+               firstLayer{n}(6)='0';
+            end
+        end
+
+        LSB=reshape(bin2dec(char(firstLayer)),400,400);
+
+        newImage=cat(3,LSB,dog(:,:,2),dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Green Bit 2'
+       %embedding
+        secondLayer=cellstr(dec2bin(dog(:,:,2)));
+
+
+        for n=1:160000
+          %embed third image in thirdBit
+            if (hidden3flatten(n)==1) && (secondLayer{n}(6)=='0')
+               secondLayer{n}(6)='1';
+            elseif (hidden3flatten(n)==0) && (secondLayer{n}(6)=='1')
+               secondLayer{n}(6)='0';
+            end
+
+        end
+
+        LSB2=reshape(bin2dec(char(secondLayer)),400,400);
+
+        newImage=cat(3,dog(:,:,1),LSB2,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newImage)
+
+    case 'Blue Bit 2'
+        %embedding
+        thirdLayer=cellstr(dec2bin(dog(:,:,3)));
+
+
+        for n=1:160000
+            %embed third image in thirdBit
+            if (hidden3flatten(n)==1) && (thirdLayer{n}(6)=='0')
+               thirdLayer{n}(6)='1';
+            elseif (hidden3flatten(n)==0) && (thirdLayer{n}(6)=='1')
+               thirdLayer{n}(6)='0';
+            end
+        end
+
+        LSB3=reshape(bin2dec(char(thirdLayer)),400,400);
+
+        newImage=cat(3,dog(:,:,1),dog(:,:,2),LSB3);
+        axes(handles.modifiedImage);
+        image(newImage)
 
 
 end

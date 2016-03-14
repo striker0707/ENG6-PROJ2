@@ -121,6 +121,10 @@ dogRedLayer=double(dog(:,:,1));
 dogGreenLayer=double(dog(:,:,2));
 dogBlueLayer=double(dog(:,:,3));
 
+firstLayer=cellstr(dec2bin(dog(:,:,1)));
+secondLayer=cellstr(dec2bin(dog(:,:,2)));
+thirdLayer=cellstr(dec2bin(dog(:,:,3)));
+
 switch str{val};
     case 'Odd-Even Red'
         recoveredImage=uint8(zeros(400,400));
@@ -456,8 +460,173 @@ switch str{val};
         axes(handles.hiddenImage);
         image(recoveredImage);
 
-
+    case 'Red Bit 0'
+        %extraction
+        recoveredImage1=zeros(400,400);
         
+
+        for m=1:160000
+            %extract first image
+            if firstLayer{m}(8)=='1'
+                recoveredImage1(m)=1;
+            elseif firstLayer{m}(8)=='0'
+                recoveredImage1(m)=0;
+            end
+
+        end
+
+
+        recoveredImage1=logical(recoveredImage1);
+        recoveredImage1=expand(recoveredImage1);
+        axes(handles.hiddenImage);
+        image(recoveredImage1)
+
+    case 'Green Bit 0'
+        %extraction
+        recoveredImage1=zeros(400,400);
+
+        for m=1:160000
+            %extract first image
+            if secondLayer{m}(8)=='1'
+                recoveredImage1(m)=1;
+            elseif secondLayer{m}(8)=='0'
+                recoveredImage1(m)=0;
+            end
+        end
+
+        recoveredImage1=logical(recoveredImage1);
+        recoveredImage1=expand(recoveredImage1);
+        axes(handles.hiddenImage);
+        image(recoveredImage1)
+
+    case 'Blue Bit 0'
+        %extraction
+        recoveredImage1=zeros(400,400);
+
+        for m=1:160000
+            %extract first image
+            if thirdLayer{m}(8)=='1'
+                recoveredImage1(m)=1;
+            elseif thirdLayer{m}(8)=='0'
+                recoveredImage1(m)=0;
+            end
+
+        end
+
+        recoveredImage1=logical(recoveredImage1);
+        recoveredImage1=expand(recoveredImage1);
+        axes(handles.hiddenImage);
+        image(recoveredImage1)
+
+    case 'Red Bit 1'
+        %extraction
+        recoveredImage2=zeros(400,400);
+
+
+        for m=1:160000
+            %extract second image
+            if firstLayer{m}(7)=='1'
+                recoveredImage2(m)=1;
+            elseif firstLayer{m}(7)=='0'
+                recoveredImage2(m)=0;
+            end
+        end
+
+        recoveredImage2=logical(recoveredImage2);
+        recoveredImage2=expand(recoveredImage2);
+        axes(handles.hiddenImage);
+        image(recoveredImage2)
+
+    case 'Green Bit 1'
+        %extraction
+        recoveredImage2=zeros(400,400);
+
+        for m=1:160000
+            %extract second image
+            if secondLayer{m}(7)=='1'
+                recoveredImage2(m)=1;
+            elseif secondLayer{m}(7)=='0'
+                recoveredImage2(m)=0;
+            end
+        end
+
+        recoveredImage2=logical(recoveredImage2);
+        recoveredImage2=expand(recoveredImage2);
+        axes(handles.hiddenImage);
+        image(recoveredImage2)
+
+    case 'Blue Bit 1'
+        %extraction
+        recoveredImage2=zeros(400,400);
+
+        for m=1:160000
+            %extract second image
+            if thirdLayer{m}(7)=='1'
+                recoveredImage2(m)=1;
+            elseif thirdLayer{m}(7)=='0'
+                recoveredImage2(m)=0;
+            end
+        end
+
+        recoveredImage2=logical(recoveredImage2);
+        recoveredImage2=expand(recoveredImage2);
+        axes(handles.hiddenImage);
+        image(recoveredImage2)
+
+    case 'Red Bit 2'
+        %extraction
+        recoveredImage3=zeros(400,400);
+
+        for m=1:160000
+            %extract third image
+            if firstLayer{m}(6)=='1'
+                recoveredImage3(m)=1;
+            elseif firstLayer{m}(6)=='0'
+                recoveredImage3(m)=0;
+            end
+        end
+
+        recoveredImage3=logical(recoveredImage3);
+        recoveredImage3=expand(recoveredImage3);
+        axes(handles.hiddenImage);
+        image(recoveredImage3)
+
+    case 'Green Bit 2'
+        %extraction
+        recoveredImage3=zeros(400,400);
+
+        for m=1:160000
+            %extract third image
+            if secondLayer{m}(6)=='1'
+                recoveredImage3(m)=1;
+            elseif secondLayer{m}(6)=='0'
+                recoveredImage3(m)=0;
+            end
+        end
+
+        recoveredImage3=logical(recoveredImage3);
+        recoveredImage3=expand(recoveredImage3);
+        axes(handles.hiddenImage);
+        image(recoveredImage3)
+
+    case 'Blue Bit 2'
+        %extraction
+        recoveredImage3=zeros(400,400);
+
+        for m=1:160000
+            %extract third image
+            if thirdLayer{m}(6)=='1'
+                recoveredImage3(m)=1;
+            elseif thirdLayer{m}(6)=='0'
+                recoveredImage3(m)=0;
+            end
+        end
+
+        recoveredImage3=logical(recoveredImage3);
+        recoveredImage3=expand(recoveredImage3);
+        axes(handles.hiddenImage);
+        image(recoveredImage3)
+
 end
 
 
