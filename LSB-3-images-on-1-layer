@@ -1,0 +1,96 @@
+
+dog=imread('dogImage.png');
+hidden1=imread('hidden01.png');
+hidden2=imread('hidden02.png');
+hidden3=imread('hidden03.png');
+hidden1flatten=flatten(hidden1);
+hidden2flatten=flatten(hidden2);
+hidden3flatten=flatten(hidden3);
+
+
+%embedding
+firstLayer=cellstr(dec2bin(dog(:,:,1)));
+
+
+for n=1:160000
+    %embed first image in firstBit
+    if (hidden1flatten(n)==1) && (firstLayer{n}(8)=='0')
+       firstLayer{n}(8)='1';
+    elseif (hidden1flatten(n)==0) && (firstLayer{n}(8)=='1')
+       firstLayer{n}(8)='0';
+    end
+    %embed second image in secondBit
+    if (hidden2flatten(n)==1) && (firstLayer{n}(7)=='0')
+       firstLayer{n}(7)='1';
+    elseif (hidden2flatten(n)==0) && (firstLayer{n}(7)=='1')
+       firstLayer{n}(7)='0';
+    end
+    %embed third image in thirdBit
+    if (hidden3flatten(n)==1) && (firstLayer{n}(6)=='0')
+       firstLayer{n}(6)='1';
+    elseif (hidden3flatten(n)==0) && (firstLayer{n}(6)=='1')
+       firstLayer{n}(6)='0';
+    end
+end
+
+LSB=reshape(bin2dec(char(firstLayer)),400,400);
+
+newImage=cat(3,LSB,dog(:,:,2),dog(:,:,3));
+subplot(1,4,1)
+image(newImage)
+axis off;
+hold on;
+
+
+%extraction
+recoveredImage1=zeros(400,400);
+recoveredImage2=zeros(400,400);
+recoveredImage3=zeros(400,400);
+
+for m=1:160000
+    %extract first image
+    if firstLayer{m}(8)=='1'
+        recoveredImage1(m)=1;
+    elseif firstLayer{m}(8)=='0'
+        recoveredImage1(m)=0;
+    end
+    
+    %extract second image
+    if firstLayer{m}(7)=='1'
+        recoveredImage2(m)=1;
+    elseif firstLayer{m}(7)=='0'
+        recoveredImage2(m)=0;
+    end
+    
+    %extract third image
+    if firstLayer{m}(6)=='1'
+        recoveredImage3(m)=1;
+    elseif firstLayer{m}(6)=='0'
+        recoveredImage3(m)=0;
+    end
+end
+
+
+recoveredImage1=logical(recoveredImage1);
+recoveredImage2=logical(recoveredImage2);
+recoveredImage3=logical(recoveredImage3);
+
+recoveredImage1=expand(recoveredImage1);
+recoveredImage2=expand(recoveredImage2);
+recoveredImage3=expand(recoveredImage3);
+
+subplot(1,4,2)
+image(recoveredImage1)
+axis off;
+hold off;
+
+subplot(1,4,3)
+image(recoveredImage2)
+axis off;
+hold off;
+
+subplot(1,4,4)
+image(recoveredImage3)
+axis off;
+hold off;
+
