@@ -1,0 +1,41 @@
+
+
+%extraction
+recoveredImage1=zeros(400,400);
+recoveredImage2=zeros(400,400);
+recoveredImage3=zeros(400,400);
+
+for m=1:160000
+    %extract first image
+    if thirdLayer{m}(8)=='1'
+        recoveredImage1(m)=1;
+    elseif thirdLayer{m}(8)=='0'
+        recoveredImage1(m)=0;
+    end
+    
+    %extract second image
+    if thirdLayer{m}(7)=='1'
+        recoveredImage2(m)=1;
+    elseif thirdLayer{m}(7)=='0'
+        recoveredImage2(m)=0;
+    end
+    
+    %extract third image
+    if thirdLayer{m}(6)=='1'
+        recoveredImage3(m)=1;
+    elseif thirdLayer{m}(6)=='0'
+        recoveredImage3(m)=0;
+    end
+end
+
+
+recoveredImage1=logical(recoveredImage1);
+recoveredImage2=logical(recoveredImage2);
+recoveredImage3=logical(recoveredImage3);
+
+recoveredImage1=expand(recoveredImage1);
+recoveredImage2=expand(recoveredImage2);
+recoveredImage3=expand(recoveredImage3);
+
+
+
