@@ -37,4 +37,6 @@ recoveredImage1=expand(recoveredImage1);
 recoveredImage2=expand(recoveredImage2);
 recoveredImage3=expand(recoveredImage3);
 
-
+image(recoveredImage1)
+image(recoveredImage2)
+image(recoveredImage3)
