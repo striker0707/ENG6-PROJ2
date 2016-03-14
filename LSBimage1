@@ -1,0 +1,46 @@
+dog=imread('dogImage.png');
+hidden1=imread('hidden01.png');
+hidden2=imread('hidden02.png');
+hidden3=imread('hidden03.png');
+hidden1flatten=flatten(hidden1);
+hidden2flatten=flatten(hidden2);
+hidden3flatten=flatten(hidden3);
+
+
+%embedding
+firstBit=cellstr(dec2bin(dog(:,:,1)));
+for n=1:160000
+    if (hidden1flatten(n)==1) && (firstBit{n}(8)==0)
+       firstBit{n}(8)=1;
+    elseif (hidden1flatten(n)==0) && (firstBit{n}(8)==1)
+       firstBit{n}(8)=0;
+    end
+end
+
+
+LSB=reshape(bin2dec(char(firstBit)),400,400);
+newImage=cat(3,LSB,dog(:,:,2),dog(:,:,3));
+subplot(1,2,1)
+image(newImage)
+axis off;
+hold on;
+
+
+%extraction
+recoveredImage=zeros(400,400);
+for m=1:160000
+    if firstBit{m}(8)==1
+        recoveredImage(m)=1;
+    elseif firstBit{m}(8)==0
+        recoveredImage(m)=0;
+    end
+end
+
+recoveredImage=logical(recoveredImage);
+recoveredImage=expand(recoveredImage);
+subplot(1,2,2)
+image(recoveredImage)
+axis off;
+hold off;
+
+
