@@ -383,6 +383,78 @@ switch str{val};
         recoveredImage=expand(recoveredImage);
         axes(handles.hiddenImage);
         image(recoveredImage);
+        
+    case 'Green Add/Sub 2'
+        %sourced from matlab forums, grabs image data from embedding gui
+        h = findobj('Tag','GUIE');
+
+         % if exists (not empty)
+        if ~isempty(h)
+            % get handles and other user-defined data associated to Gui1
+            g1data = guidata(h);
+           
+            dog=getimage(g1data.originalImage);
+        end
+        
+        dogGreenLayermod=dog(:,:,2);
+        for n=1:160000
+            if dogGreenLayermod(n)==255
+                dogGreenLayermod(n)=253;
+            elseif dogGreenLayermod(n)==254
+                dogGreenLayermod(n)=252;
+            else
+                dogGreenLayermod(n)=dogGreenLayermod(n);
+            end
+        end
+        
+        recoveredImage=zeros(400,400);
+        for m=1:160000
+            if dogGreenLayermod(m)==dogGreenLayer(m)-2
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        axes(handles.hiddenImage);
+        image(recoveredImage);
+        
+    case 'Blue Add/Sub 2'
+        %sourced from matlab forums, grabs image data from embedding gui
+        h = findobj('Tag','GUIE');
+
+         % if exists (not empty)
+        if ~isempty(h)
+            % get handles and other user-defined data associated to Gui1
+            g1data = guidata(h);
+           
+            dog=getimage(g1data.originalImage);
+        end
+        
+        dogBlueLayermod=dog(:,:,2);
+        for n=1:160000
+            if dogBlueLayermod(n)==255
+                dogBlueLayermod(n)=253;
+            elseif dogBlueLayermod(n)==254
+                dogBlueLayermod(n)=252;
+            else
+                dogBlueLayermod(n)=dogBlueLayermod(n);
+            end
+        end
+        
+        recoveredImage=zeros(400,400);
+        for m=1:160000
+            if dogBlueLayermod(m)==dogBlueLayer(m)-2
+                recoveredImage(m)=1;
+            else
+                recoveredImage(m)=0;
+            end
+        end
+        recoveredImage=logical(recoveredImage);
+        recoveredImage=expand(recoveredImage);
+        axes(handles.hiddenImage);
+        image(recoveredImage);
 
 
         

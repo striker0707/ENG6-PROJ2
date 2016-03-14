@@ -593,6 +593,30 @@ switch str{val};
         newDogImage=cat(3,dogRedLayerNew,dog(:,:,2),dog(:,:,3));
         axes(handles.modifiedImage);
         image(newDogImage)
+        
+    case 'Green Add/Subtract 2'
+        for n=1:160000
+            if hidden1flatten(n)==1 
+                dogGreenLayerNew(n)=dogGreenLayer(n)+2;
+            elseif hidden1flatten(n)==0
+                dogGreenLayerNew(n)=dogGreenLayer(n)-2;
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dogGreenLayerNew,dog(:,:,3));
+        axes(handles.modifiedImage);
+        image(newDogImage)
+        
+    case 'Blue Add/Subtract 2'
+        for n=1:160000
+            if hidden1flatten(n)==1 
+                dogBlueLayerNew(n)=dogBlueLayer(n)+2;
+            elseif hidden1flatten(n)==0
+                dogBlueLayerNew(n)=dogBlueLayer(n)-2;
+            end
+        end
+        newDogImage=cat(3,dog(:,:,1),dog(:,:,2),dogBlueLayerNew);
+        axes(handles.modifiedImage);
+        image(newDogImage)
 
 
 end
