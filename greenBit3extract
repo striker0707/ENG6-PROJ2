@@ -1,0 +1,16 @@
+%extraction
+recoveredImage3=zeros(400,400);
+
+for m=1:160000
+    %extract third image
+    if secondLayer{m}(6)=='1'
+        recoveredImage3(m)=1;
+    elseif secondLayer{m}(6)=='0'
+        recoveredImage3(m)=0;
+    end
+    
+end
+
+recoveredImage3=logical(recoveredImage3);
+recoveredImage3=expand(recoveredImage3);
+image(recoveredImage3)
